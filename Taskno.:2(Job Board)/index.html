@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerConnect | Find Your Dream Job</title>
+    <style>
+        :root {
+            --primary: #8458B3;      /* Purple Pain */
+            --secondary: #a28089;    /* Heavy Purple */
+            --accent: #d0bdf4;       /* Medium Purple */
+            --light: #e5eaf5;        /* Freeze Purple */
+            --dark: #2d2a32;         /* Custom dark for contrast */
+            --gray: #a0d2eb;         /* Ice Cold */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(160,210,235,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--light);
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(160,210,235,0.1);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--gray);
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-solid {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-solid:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--gray);
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            background-color: rgba(208,189,244,0.15); /* accent shade, transparent */
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background-color: var(--light);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(160,210,235,0.1);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 1rem;
+        }
+
+        .search-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: var(--light);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-btn {
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: var(--gray);
+            color: var(--primary);
+        }
+
+        .resume-upload {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .resume-upload p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .section {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(160,210,235,0.1);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-desc {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .job-categories {
+            background-color: var(--light);
+            padding: 3rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(160,210,235,0.1);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-item {
+            padding: 1.5rem;
+            background-color: var(--gray);
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            color: var(--primary);
+            text-decoration: none;
+            display: block;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .category-count {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .testimonials {
+            background-color: var(--light);
+        }
+
+        .testimonial-card {
+            background-color: var(--gray);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(160,210,235,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--primary);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--accent);
+            color: var(--gray);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="data:image/jpeg;base64,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">  
+                <span>JobPulse</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse Jobs</a></li>
+                    <li class="dropdown">
+                        <a href="#">Pages ▼</a>
+                        <div class="dropdown-content">
+                            <a href="#">About Us</a>
+                            <a href="#">Testimonials</a>
+                            <a href="#">Pricing</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Blog ▼</a>
+                        <div class="dropdown-content">
+                            <a href="#">Career Tips</a>
+                            <a href="#">Industry News</a>
+                            <a href="#">Success Stories</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline">Log in</a>
+                <a href="#" class="btn btn-solid">Post a Job</a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Find Your Dream Job Today</h1>
+            <p>Join thousands of employers and candidates in our growing community. We connect talent with opportunity.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">4,536+</div>
+                    <div class="stat-label">Jobs Listed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <form class="search-form">
+                    <input type="text" class="search-input" placeholder="Search keyword">
+                    <input type="text" class="search-input" placeholder="Location">
+                    <select class="search-input">
+                        <option value="">All Categories</option>
+                        <option>Technology</option>
+                        <option>Healthcare</option>
+                        <option>Finance</option>
+                        <option>Education</option>
+                    </select>
+                    <button type="submit" class="search-btn">Find Job</button>
+                </form>
+                
+                <div class="resume-upload">
+                    <p>Let employers find you</p>
+                    <a href="#" class="btn btn-accent">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                        </svg>
+                        Upload Your Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why Choose JobPulse</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Advanced Job Matching</h3>
+                    <p class="feature-desc">Our smart algorithm matches your skills and preferences with the perfect job opportunities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Privacy Protection</h3>
+                    <p class="feature-desc">Your personal information stays secure. You control who sees your resume.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Fast Results</h3>
+                    <p class="feature-desc">85% of candidates find suitable positions within 2 weeks of using our platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" style="background-color: #e5eaf5;">
+        <div class="container">
+            <h2 class="section-title">Popular Job Categories</h2>
+            <div class="job-categories">
+                <div class="categories-grid">
+                    <a href="#" class="category-item">
+                        <h3>Technology</h3>
+                        <span class="category-count">1,240 Jobs</span>
+                    </a>
+                    <a href="#" class="category-item">
+                        <h3>Healthcare</h3>
+                        <span class="category-count">856 Jobs</span>
+                    </a>
+                    <a href="#" class="category-item">
+                        <h3>Finance</h3>
+                        <span class="category-count">732 Jobs</span>
+                    </a>
+                    <a href="#" class="category-item">
+                        <h3>Education</h3>
+                        <span class="category-count">512 Jobs</span>
+                    </a>
+                    <a href="#" class="category-item">
+                        <h3>Marketing</h3>
+                        <span class="category-count">489 Jobs</span>
+                    </a>
+                    <a href="#" class="category-item">
+                        <h3>Design</h3>
+                        <span class="category-count">421 Jobs</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"JobPulse helped me find my dream job in just two weeks! The resume builder and job matching system are incredibly effective."</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Senior Developer at TechSolutions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Ready to Take the Next Step?</h2>
+            <div style="text-align: center;">
+                <a href="#" class="btn btn-solid" style="padding: 1rem 2rem; font-size: 1.1rem;">Create Your Free Profile</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>JobPulse</h3>
+                    <p style="color: #a0d2eb; margin-bottom: 1.5rem;">Connecting talent with opportunity since 2015.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>For Candidates</h3>
+                    <ul>
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Candidate Dashboard</a></li>
+                        <li><a href="#">Job Alerts</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>For Employers</h3>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Employer Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 JobPulse | Designed by JEFFRIN PONSHIYA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

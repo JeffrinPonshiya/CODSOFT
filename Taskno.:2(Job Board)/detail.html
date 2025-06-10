@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head -->
+    <title>Job Details - JobBoard</title>
+</head>
+<body>
+    <header>
+        <!-- Same header -->
+    </header>
+
+    <main class="job-detail">
+        <div class="container">
+            <div class="job-header">
+                <h1 id="jobTitle">Job Title</h1>
+                <p id="jobCompany">Company Name</p>
+                <p id="jobLocation">Location</p>
+                <a href="apply.html" class="btn">Apply Now</a>
+            </div>
+
+            <div class="job-content">
+                <div class="job-description">
+                    <h2>Job Description</h2>
+                    <div id="jobDescription">
+                        <!-- Loaded via JS -->
+                    </div>
+                </div>
+                
+                <div class="job-sidebar">
+                    <div class="job-info">
+                        <h3>Details</h3>
+                        <ul>
+                            <li><strong>Salary:</strong> <span id="jobSalary"></span></li>
+                            <li><strong>Type:</strong> <span id="jobType"></span></li>
+                            <li><strong>Posted:</strong> <span id="jobPosted"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Same footer -->
+    </footer>
+
+    <script src="js/jobs.js"></script>
+</body>
+</html>

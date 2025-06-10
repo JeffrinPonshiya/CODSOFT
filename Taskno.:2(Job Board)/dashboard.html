@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head -->
+    <title>Employer Dashboard - JobBoard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Modified header for logged-in users -->
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <img src="../../images/logo.png" alt="JobBoard Logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../listings.html">Browse Jobs</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="#" id="logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="container">
+            <aside class="sidebar">
+                <div class="profile">
+                    <h3>Welcome, <span id="employerName">Company</span></h3>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="#">Applications</a></li>
+                        <li><a href="#">Settings</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <section class="dashboard-content">
+                <h1>Employer Dashboard</h1>
+                <!-- Dashboard content -->
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Same footer -->
+    </footer>
+
+    <script src="../../js/auth.js"></script>
+</body>
+</html>
